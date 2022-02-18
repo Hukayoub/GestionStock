@@ -41,11 +41,14 @@ public class CategorieDTO {
 	public static Categorie toEntity(CategorieDTO categorieDTO) {
 		if(categorieDTO==null) {
 			return null;
-			//TODO throw an exception
 
 		}
 		
-		//FIXME
-		return ;
+		Categorie categorie = new Categorie();
+		
+		categorie.setId(categorieDTO.getId());
+		categorie.setCode(categorieDTO.getCode());
+
+		return categorie;
 	}
 }

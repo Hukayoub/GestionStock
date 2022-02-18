@@ -23,7 +23,7 @@ public class AdresseDTO {
 	private String pays;
 	
 	
-	public AdresseDTO fromEntity(Adresse adresse) {
+	public static AdresseDTO fromEntity(Adresse adresse) {
 		if(adresse==null) {
 			return null;
 			//TODO throw an exception
@@ -42,7 +42,7 @@ public class AdresseDTO {
 		
 	}
 	
-	public Adresse toEntity(AdresseDTO adresseDTO) {
+	public static Adresse toEntity(AdresseDTO adresseDTO) {
 		
 		if(adresseDTO==null) {
 			return null;

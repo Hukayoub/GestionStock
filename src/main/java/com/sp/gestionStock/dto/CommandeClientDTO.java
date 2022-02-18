@@ -27,7 +27,7 @@ public class CommandeClientDTO {
 	@JsonIgnore
 	private List<LigneCdeClientDTO> ligneCommandeClients;
 	
-	public CommandeClientDTO fromEntity(CommandeClient commandeClient) {
+	public static CommandeClientDTO fromEntity(CommandeClient commandeClient) {
 		if(commandeClient==null) {
 			return null;
 			//TODO throw an exception
@@ -37,14 +37,15 @@ public class CommandeClientDTO {
 		//Category -> CategoryDto
 
 		return  CommandeClientDTO.builder()
-				.code(getCode())
-				.dateCommande(getDateCommande())
-				.client(getClient())
+				.id(commandeClient.getId())
+				.code(commandeClient.getCode())
+				.dateCommande(commandeClient.getDateCommande())
+				.client(ClientDTO.fromEntity(commandeClient.getClient()))
 				.build();
 		
 	}
 	
-	public CommandeClient toEntity(CommandeClientDTO CommandeClientDTO) {
+	public static CommandeClient toEntity(CommandeClientDTO CommandeClientDTO) {
 		
 		if(CommandeClientDTO==null) {
 			return null;
@@ -53,9 +54,9 @@ public class CommandeClientDTO {
 		}
 		CommandeClient commandeClient = new CommandeClient();
 		
+		commandeClient.setId(CommandeClientDTO.getId());
 		commandeClient.setCode(CommandeClientDTO.getCode());
 		commandeClient.setDateCommande(CommandeClientDTO.getDateCommande());
-		commandeClient.setClient(CommandeClientDTO.getClient());
 
 		
 

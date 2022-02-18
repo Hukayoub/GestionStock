@@ -2,6 +2,9 @@ package com.sp.gestionStock.services.implementation;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.sp.gestionStock.dto.FournisseurDTO;
 import com.sp.gestionStock.exception.ErrorCodes;
 import com.sp.gestionStock.exception.InvalidEntityException;
+import com.sp.gestionStock.models.Fournisseur;
 import com.sp.gestionStock.repository.FournisseurRepository;
 import com.sp.gestionStock.services.FournisseurService;
 import com.sp.gestionStock.validators.FournisseurValidator;
@@ -40,20 +44,31 @@ public class FournisseurServiceImpl implements FournisseurService{
 		if(id==null)
 		{
 			log.error("id of fournisseur is null");
+			return null;
 		}
-		return ;
+		Optional<Fournisseur> fournisseur = fournisseurRepository.findById(id);
+		return Optional.of(FournisseurDTO.fromEntity(fournisseur.get())).orElseThrow(()
+				-> new EntityNotFoundException("Aucun fournisseur avec cet id"));
 	}
 
 	@Override
 	public List<FournisseurDTO> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return fournisseurRepository
+				.findAll()
+				.stream()
+				.map(FournisseurDTO::fromEntity)
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public void delete(Integer id) {
-		// TODO Auto-generated method stub
 		
+		if(id==null)
+		{
+			log.error("Fournisseur id is null");
+			return;
+		}
+		fournisseurRepository.deleteById(id);
 	}
 
 	

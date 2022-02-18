@@ -2,7 +2,6 @@ package com.sp.gestionStock.dto;
 
 import java.time.Instant;
 
-import com.sp.gestionStock.models.LigneVente;
 import com.sp.gestionStock.models.Ventes;
 
 import lombok.Builder;
@@ -21,7 +20,7 @@ public class VentesDTO {
 	private String commentaire;
 	
 	
-	public VentesDTO fromEntity(Ventes ventes ) {
+	public static VentesDTO fromEntity(Ventes ventes ) {
 		
 		if(ventes == null) {
 			
@@ -31,13 +30,14 @@ public class VentesDTO {
 		}
 		
 		return VentesDTO.builder()
-		.code(getCode())
-		.dateVente(getDateVente())
-		.commentaire(getCommentaire())
+		.id(ventes.getId())
+		.code(ventes.getCode())
+		.dateVente(ventes.getDateVente())
+		.commentaire(ventes.getCommentaire())
 		.build();
 	}
 	
-	public Ventes toEntity(VentesDTO ventesDTO) {
+	public static Ventes toEntity(VentesDTO ventesDTO) {
 		
 		if(ventesDTO == null) {
 			
@@ -47,6 +47,7 @@ public class VentesDTO {
 		}
 		
 		Ventes ventes = new Ventes();
+		ventes.setId(ventesDTO.getId());
 		ventes.setCode(ventesDTO.getCode());
 		ventes.setDateVente(ventesDTO.getDateVente());
 		ventes.setCommentaire(ventesDTO.getCommentaire());

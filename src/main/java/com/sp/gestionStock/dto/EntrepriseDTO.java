@@ -3,7 +3,6 @@ package com.sp.gestionStock.dto;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sp.gestionStock.models.CommandeFournisseur;
 import com.sp.gestionStock.models.Entreprise;
 
 import lombok.Builder;
@@ -51,13 +50,13 @@ public class EntrepriseDTO {
 		//Category -> CategoryDto
 
 		return  EntrepriseDTO.builder()
-				.nom(getNom())
-				.description(getDescription())
-				.adresse(getAdresse())
-				.codeFiscal(getCodeFiscal())
-				.photo(getPhoto())
-				.mail(getMail())
-				.numTel(getNumTel())
+				.nom(entreprise.getNom())
+				.description(entreprise.getDescription())
+				.adresse(AdresseDTO.fromEntity(entreprise.getAdresse()))
+				.codeFiscal(entreprise.getCodeFiscal())
+				.photo(entreprise.getPhoto())
+				.mail(entreprise.getMail())
+				.numTel(entreprise.getNumTel())
 				.build();
 		
 	}
@@ -73,7 +72,6 @@ public class EntrepriseDTO {
 		
 		entreprise.setNom(entrepriseDto.getNom());
 		entreprise.setDescription(entrepriseDto.getDescription());
-		entreprise.setAdresse(entrepriseDto.getAdresse());
 		entreprise.setCodeFiscal(entrepriseDto.getCodeFiscal());
 		entreprise.setPhoto(entrepriseDto.getPhoto());
 		entreprise.setMail(entrepriseDto.getMail());

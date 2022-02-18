@@ -4,7 +4,6 @@ import java.time.Instant;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sp.gestionStock.models.Article;
 import com.sp.gestionStock.models.CommandeFournisseur;
 
 import lombok.Builder;
@@ -41,10 +40,11 @@ public class CommandeFournisseurDTO {
 		//Category -> CategoryDto
 
 		return  CommandeFournisseurDTO.builder()
+				.id(getId())
 				.code(getCode())
 				.dateCommande(getDateCommande())
-				.fournisseur(getFournisseur())
-				.fournisseurEntreprise(getFournisseurEntreprise())
+				.fournisseur(FournisseurDTO.fromEntity(cdeFournisseur.getFournisseur()))
+				.fournisseurEntreprise(EntrepriseDTO.fromEntity(cdeFournisseur.getFournisseurEntreprise()))
 				.build();
 		
 	}
@@ -58,10 +58,9 @@ public class CommandeFournisseurDTO {
 		}
 		CommandeFournisseur cdf = new CommandeFournisseur();
 		
+		cdf.setId(cdeFournisseurDto.getId());
 		cdf.setCode(cdeFournisseurDto.getCode());
 		cdf.setDateCommande(cdeFournisseurDto.getDateCommande());
-		cdf.setFournisseur(cdeFournisseurDto.getFournisseur());
-		cdf.setFournisseurEntreprise(cdeFournisseurDto.getFournisseurEntreprise());
 	
 		return cdf;
 	}

@@ -27,8 +27,9 @@ public class LigneVenteDTO {
 		}
 		
 		return LigneVenteDTO.builder()
-		.vente(getVente())
-		.quantite(getQuantite())
+		.id(ligneVente.getId())
+		.vente(VentesDTO.fromEntity(ligneVente.getVente()))
+		.quantite(ligneVente.getQuantite())
 		.build();
 	}
 	
@@ -42,7 +43,7 @@ public class LigneVenteDTO {
 		}
 		
 		LigneVente ligneVente = new LigneVente();
-		ligneVente.setVente(ligneVenteDTO.getVente());
+		ligneVente.setId(ligneVenteDTO.getId());
 		ligneVente.setQuantite(ligneVenteDTO.getQuantite());
 		
 		return ligneVente;

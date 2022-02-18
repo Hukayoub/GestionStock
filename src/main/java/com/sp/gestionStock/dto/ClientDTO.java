@@ -3,7 +3,6 @@ package com.sp.gestionStock.dto;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sp.gestionStock.models.Categorie;
 import com.sp.gestionStock.models.Client;
 
 import lombok.Builder;
@@ -45,10 +44,35 @@ public class ClientDTO {
 		//Category -> CategoryDto
 
 		return  ClientDTO.builder()
-				.
+				.id(client.getId())
+				.nom(client.getNom())
+				.prenom(client.getPrenom())
+				.adresse(AdresseDTO.fromEntity(client.getAdresse()))
+				.photo(client.getPhoto())
+				.mail(client.getMail())
+				.numTel(client.getNumTel())
 				.build();
 		
 	}
 	
 	// FIXME : Needs a toEntityMethod
+	
+	public static Client toEntity(ClientDTO clientDTO) {
+		
+		if(clientDTO == null) {
+			return null;
+		}
+		
+		Client client = new Client();
+		
+		client.setId(clientDTO.getId());
+		client.setNom(clientDTO.getNom());
+		client.setPrenom(clientDTO.getPrenom());
+		client.setPhoto(clientDTO.getPhoto());
+		client.setMail(clientDTO.getMail());
+		client.setNumTel(clientDTO.getNumTel());
+		
+		
+		return client;
+	}
 }

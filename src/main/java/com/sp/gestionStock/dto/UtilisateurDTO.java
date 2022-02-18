@@ -4,7 +4,6 @@ import java.time.Instant;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sp.gestionStock.models.Fournisseur;
 import com.sp.gestionStock.models.Utilisateur;
 
 import lombok.Builder;
@@ -40,7 +39,7 @@ public class UtilisateurDTO {
 	
 	
 
-	public UtilisateurDTO fromEntity(Utilisateur utilisateur) {
+	public static UtilisateurDTO fromEntity(Utilisateur utilisateur) {
 		if(utilisateur==null) {
 			return null;
 			//TODO throw an exception
@@ -50,19 +49,19 @@ public class UtilisateurDTO {
 		//Category -> CategoryDto
 
 		return  UtilisateurDTO.builder()
-				.nom(getNom())
-				.prenom(getPrenom())
-				.adresse(getAdresse())
-				.photo(getPhoto())
-				.mail(getMail())
-				.dateDeNaissance(getDateDeNaissance())
-				.motDePasse(getMotDePasse())
-				.utilisateurEntreprise(getUtilisateurEntreprise())
+				.nom(utilisateur.getNom())
+				.prenom(utilisateur.getPrenom())
+				.adresse(AdresseDTO.fromEntity(utilisateur.getAdresse()))
+				.photo(utilisateur.getPhoto())
+				.mail(utilisateur.getMail())
+				.dateDeNaissance(utilisateur.getDateDeNaissance())
+				.motDePasse(utilisateur.getMotDePasse())
+				.utilisateurEntreprise(EntrepriseDTO.fromEntity(utilisateur.getUtilisateurEntreprise()))
 				.build();
 		
 	}
 	
-	public Utilisateur toEntity(UtilisateurDTO utilisateurDTO) {
+	public static Utilisateur toEntity(UtilisateurDTO utilisateurDTO) {
 		
 		if(utilisateurDTO==null) {
 			return null;
@@ -73,12 +72,10 @@ public class UtilisateurDTO {
 		
 		utilisateur.setNom(utilisateurDTO.getNom());
 		utilisateur.setPrenom(utilisateurDTO.getPrenom());
-		utilisateur.setAdresse(utilisateurDTO.getAdresse());
 		utilisateur.setPhoto(utilisateurDTO.getPhoto());
 		utilisateur.setMail(utilisateurDTO.getMail());
 		utilisateur.setDateDeNaissance(utilisateurDTO.getDateDeNaissance());
 		utilisateur.setMotDePasse(utilisateurDTO.getMotDePasse());
-		utilisateur.setUtilisateurEntreprise(utilisateurDTO.getUtilisateurEntreprise());
 
 
 	

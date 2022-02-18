@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sp.gestionStock.models.LigneVente;
 import com.sp.gestionStock.models.MvStk;
 import com.sp.gestionStock.models.TypeMvtStk;
 
@@ -39,9 +38,10 @@ public class MvStkDTO {
 		}
 		
 		return MvStkDTO.builder()
-				.dateMvt(getDateMvt())
-				.quantite(getQuantite())
-				.article(getArticle())
+				.id(mvStk.getId())
+				.dateMvt(mvStk.getDateMvt())
+				.quantite(mvStk.getQuantite())
+				.article(ArticleDTO.fromEntity(mvStk.getArticle()))
 				.build();
 	}
 	
@@ -57,9 +57,9 @@ public MvStk toEntity(MvStkDTO mvStkDTO) {
 		
 		MvStk mvStk = new MvStk();
 		
+		mvStk.setId(mvStkDTO.getId());
 		mvStk.setDateMvt(mvStkDTO.getDateMvt());
 		mvStk.setQuantite(mvStkDTO.getQuantite());
-		mvStk.setArticle(mvStkDTO.getArticle());
 		
 		return mvStk;
 	}

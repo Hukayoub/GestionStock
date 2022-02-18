@@ -38,7 +38,7 @@ public class ClientServiceImpl implements ClientService{
 			
 		}
 		//FIXME : ClientDTO needs a toEntity() method
-		return ClientDTO.fromEntity(clientRepository.save(ClientDTO.fromEntity(dto)));
+		return ClientDTO.fromEntity(clientRepository.save(ClientDTO.toEntity(dto)));
 	}
 
 	@Override

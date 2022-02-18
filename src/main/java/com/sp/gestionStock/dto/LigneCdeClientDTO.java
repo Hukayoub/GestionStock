@@ -1,6 +1,5 @@
 package com.sp.gestionStock.dto;
 
-import com.sp.gestionStock.models.Fournisseur;
 import com.sp.gestionStock.models.LigneCdeClt;
 
 import lombok.Builder;
@@ -28,8 +27,9 @@ public class LigneCdeClientDTO {
 		//Category -> CategoryDto
 
 		return  LigneCdeClientDTO.builder()
-				.article(getArticle())
-				.commandeClient(getCommandeClient())
+				.id(cdeClt.getId())
+				.article(ArticleDTO.fromEntity(cdeClt.getArticle()))
+				.commandeClient(CommandeClientDTO.fromEntity(cdeClt.getCommandeClient()))
 				.build();
 		
 	}
@@ -43,8 +43,7 @@ public class LigneCdeClientDTO {
 		}
 		LigneCdeClt ligneCdeClt = new LigneCdeClt();
 		
-		ligneCdeClt.setNom(cdeClientDTO.getArticle());
-		ligneCdeClt.setPrenom(cdeClientDTO.getCommandeClient());
+		ligneCdeClt.setId(cdeClientDTO.getId());
 
 		return ligneCdeClt;
 

@@ -1,6 +1,5 @@
 package com.sp.gestionStock.dto;
 
-import com.sp.gestionStock.models.MvStk;
 import com.sp.gestionStock.models.Roles;
 
 import lombok.Builder;
@@ -26,8 +25,9 @@ public RolesDTO fromEntity(Roles roles) {
 		}
 		
 		return RolesDTO.builder()
-				.roleName(getRoleName())
-				.utilisateur(getUtilisateur())
+				.id(roles.getId())
+				.roleName(roles.getRoleName())
+				.utilisateur(UtilisateurDTO.fromEntity(roles.getUtilisateur()))
 				.build();
 	}
 	
@@ -43,8 +43,8 @@ public Roles toEntity(RolesDTO rolesDTO) {
 		
 		Roles roles = new Roles();
 		
+		roles.setId(rolesDTO.getId());
 		roles.setRoleName(rolesDTO.getRoleName());
-		roles.setUtilisateur(rolesDTO.getUtilisateur());
 		
 		return roles;
 	}
